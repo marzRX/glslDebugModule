@@ -1,0 +1,15 @@
+# 出力ファイル（実行ファイル）を無視
+*.o
+*.out
+*.obj
+*.tds
+*.exe
+*.*~
+*.jpg
+*.spv
+.idea
+cmake-build-debug/
+*.ini
+_Camera_
+*.tar
+*.tar.gz
