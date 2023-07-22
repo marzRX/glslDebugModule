@@ -24,7 +24,7 @@ On the other hand, those without the suffix are projects before the debug module
 
 You can choose the OpenGL extension. You can build with whichever you prefer.
 
-### Building on Linux/MinGW or MSYS2 environments
+### Building on Linux or MinGW
 
 #### GLFW + GLEW
 To build with GLEW, execute the following command:
