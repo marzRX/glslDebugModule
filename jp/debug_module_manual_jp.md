@@ -13,7 +13,7 @@ glslDebugModuleは、OpenGLの2Dプログラム向けのGLSLデバッグ補助�
 また、開発中のGLSLをデバッグ対応にするための詳細なワークフローは、[adding_debug_module_workflow_jp.md](adding_debug_module_workflow_jp.md) で紹介します。
 
 ### GLSLのセットアップ：
-あなたの GLSL にデバッグモジュールを追加する必要があります。デバッグモジュール挿入スクリプトを使用することで、簡単にGLSLにデバッグモジュールを追加することができます。具体的な方法は[insert_debug_module_manual.md](scripts/insert_debug_module_manual.md)を参照してください。
+あなたの GLSL にデバッグモジュールを追加する必要があります。デバッグモジュール挿入スクリプトを使用することで、簡単にGLSLにデバッグモジュールを追加することができます。具体的な方法は[insert_debug_module_manual_jp.md](scripts/insert_debug_module_manual_jp.md)を参照してください。
 
 ### C++のセットアップ：
 C++側では、GLSLに数字のテクスチャアトラスを渡す必要があります。このプロセスは、GLSLのデバッグ情報を適切に表示するために必要なステップです。コード例は本マニュアルの最後に示します。
