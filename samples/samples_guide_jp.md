@@ -24,7 +24,7 @@ glslDebugModuleの使い方を理解をできるように3つのサンプルを�
 
 OpenGL拡張を選ぶことができます。好きなものを選んでビルドできます。
 
-### Linux/MinGWまたはMSYS2環境でのビルド方法
+### LinuxまたはMinGWでのビルド方法
 
 #### GLFW + GLEW
 GLEWを使用してビルドするには、以下のコマンドを実行します。
