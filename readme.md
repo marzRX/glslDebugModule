@@ -10,10 +10,10 @@ glslDebugModule is a GLSL debugging assistance module intended for OpenGL 2D pro
 ## Setup
 The setup mainly consists of two steps: GLSL setup and C++ setup.
 
-Also, for a detailed workflow on making your developing GLSL debuggable, please refer to adding_debug_module_workflow.md.
+Also, for a detailed workflow on making your developing GLSL debuggable, please refer to [adding_debug_module_workflow.md](adding_debug_module_workflow.md).
 
 ### GLSL Setup:
-You will need to add the debug module to your GLSL. By using the debug module insertion script, you can easily add the debug module to GLSL. For specific methods, please refer to insert_debug_module_manual.md.
+You will need to add the debug module to your GLSL. By using the debug module insertion script, you can easily add the debug module to GLSL. For specific methods, please refer to [insert_debug_module_manual.md](scripts/insert_debug_module_manual.md).
 
 ### C++ Setup:
 On the C++ side, you will need to pass a number texture atlas to GLSL. This process is a necessary step to display the GLSL debug information properly. Code examples will be shown at the end of this manual.
