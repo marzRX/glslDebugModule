@@ -50,7 +50,7 @@
 
 1. **ファイル名を保持する定数を用意**
     ```c++
-    const *char FILE_DEBUG_DIGITS = "your_db_digits.png";
+    const char *FILE_DEBUG_DIGITS = "your_db_digits.png";
     ```
 
 2. **テクスチャIDを格納する変数を用意**
@@ -68,6 +68,7 @@
     シェーダーはデバッグ用のテクスチャをスロット10番で渡してもらうことを期待しています。
 
     ```c++
+    glUniform1i(glGetUniformLocation(programID, "debug_digits"), 10);
     glActivateTexture(GL_TEXTURE0 + 10);
     glBindTexture(GL_TEXTURE_2D, texture_debug_digits);
     ```

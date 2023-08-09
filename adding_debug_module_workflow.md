@@ -49,7 +49,7 @@ Add processes to pass the numeric texture to the shader.
 
 1. **Prepare a constant to hold the file name**
     ```c++
-    const *char FILE_DEBUG_DIGITS = "your_db_digits.png";
+    const char *FILE_DEBUG_DIGITS = "your_db_digits.png";
     ```
 
 2. **Prepare a variable to store the texture ID**
@@ -67,6 +67,7 @@ Add processes to pass the numeric texture to the shader.
     The shader expects to receive the debug texture at slot 10.
 
     ```c++
+    glUniform1i(glGetUniformLocation(programID, "debug_digits"), 10);
     glActivateTexture(GL_TEXTURE0 + 10);
     glBindTexture(GL_TEXTURE_2D, texture_debug_digits);
     ```
