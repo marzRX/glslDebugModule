@@ -4,11 +4,11 @@
 #include <string>
 #include <cstring>
 #define STB_IMAGE_IMPLEMENTATION
-#include "../stb/stb_image.h"
+#include "stb_image.h"
 #include <vector>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "../stb/stb_image_write.h"
+#include "stb_image_write.h"
 
 TextureInfo createEmptyTexture(int width, int height, GLenum interp_mode)
 {
