@@ -376,7 +376,7 @@ void render_frame()
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
   }
 
-//  saveTexture(m_texture[TEX_DST].id, "test.png", m_texture[TEX_SRC].width, m_texture[TEX_SRC].height);
+//  saveTexture("test.png", m_texture[TEX_SRC].width, m_texture[TEX_SRC].height, m_texture[TEX_DST].id);
 
   // 表示用のビューポートを作成（ここでは同じ位置）
   glViewport(0, 0, m_texture[TEX_DST].width, m_texture[TEX_DST].height);
@@ -427,7 +427,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
       break;
 
     case GLFW_KEY_F2:
-      saveTexture(m_texture[TEX_DST].id, "dst.png", m_texture[TEX_DST].width, m_texture[TEX_DST].height);
+      saveTexture("dst.png", m_texture[TEX_DST].width, m_texture[TEX_DST].height, m_texture[TEX_DST].id);
       break;
 
     }
