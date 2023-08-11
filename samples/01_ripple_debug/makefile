@@ -17,7 +17,7 @@ CC = g++
 DIR_GLCOMMON = $(CURROOT)External/marglCommon
 DIR_GL3W = $(CURROOT)External/gl3w
 DIR_STB = $(CURROOT)External/stb
-INC = -I$(DIR_GLCOMMON) -I$(DIR_GL3W)
+INC = -I$(DIR_GLCOMMON) -I$(DIR_GL3W) -I$(DIR_STB)
 
 ifdef WINDIR
   # Windows (msys2)

@@ -17,7 +17,8 @@ CC = g++
 DIR_GLCOMMON = $(CURROOT)External/marglCommon
 DIR_GL3W = $(CURROOT)External/gl3w
 DIR_IMGUI = $(CURROOT)External/imgui
-INC = -I$(DIR_GLCOMMON) -I$(DIR_IMGUI) -I$(DIR_GL3W)
+DIR_STB = $(CURROOT)External/stb
+INC = -I$(DIR_GLCOMMON) -I$(DIR_IMGUI) -I$(DIR_GL3W) -I$(DIR_STB)
 ifdef WINDIR
   # Windows (msys2)
   LIBS = -lopengl32 -lglfw3
@@ -28,7 +29,7 @@ else
   # Linux
   LIBS = -lGL -lglfw -ldl
 ifdef GLEW
-  LIBS += -lGLEW -ldl
+  LIBS += -lGLEW
 endif
 endif
 
