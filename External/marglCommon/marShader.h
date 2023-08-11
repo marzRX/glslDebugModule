@@ -59,8 +59,8 @@ public:
 
   // ＠＠既存のコードをサポートするために残しておく
   [[deprecated("Use SetLocation() and GetLocation() instead.")]]
-  int Activate(const char* name) {
-    return GetLocation(name);
+  void Activate(const char* name, int loc = -1) {
+    SetLocation(name, loc);
   }
 
   [[deprecated("Use GetLocation() instead.")]]
