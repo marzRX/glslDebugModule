@@ -88,21 +88,7 @@ TextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
   return textureInfo;
 }
 
-bool saveTextureAsPNG(GLuint texture, const char* filepath, int width, int height)
-{
-  glBindTexture(GL_TEXTURE_2D, texture);
-
-  std::vector<unsigned char> data(width * height * 4);
-  glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, data.data());
-
-  int result = stbi_write_png(filepath, width, height, 4, data.data(), width * 4);
-
-  glBindTexture(GL_TEXTURE_2D, 0);
-
-  return result != 0;
-}
-
-bool saveFramebufferAsPNG(GLuint framebuffer, const char* filepath, int width, int height)
+bool saveFramebufferAsPNG(const char* filepath, int width, int height, GLuint framebuffer)
 {
   glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
@@ -124,9 +110,23 @@ bool saveFramebufferAsPNG(GLuint framebuffer, const char* filepath, int width, i
 }
 
 
-bool saveTexture(GLuint texture, const char* filepath, int width, int height)
+bool saveTextureAsPNG(const char* filepath, int width, int height, GLuint texture)
 {
-  return saveTextureAsPNG(texture, filepath, width, height);
+  glBindTexture(GL_TEXTURE_2D, texture);
+
+  std::vector<unsigned char> data(width * height * 4);
+  glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, data.data());
+
+  int result = stbi_write_png(filepath, width, height, 4, data.data(), width * 4);
+
+  glBindTexture(GL_TEXTURE_2D, 0);
+
+  return result != 0;
+}
+
+bool saveTexture(const char* filepath, int width, int height, GLuint texture)
+{
+  return saveTextureAsPNG(filepath, width, height, texture);
 }
 
 // 上下反転
