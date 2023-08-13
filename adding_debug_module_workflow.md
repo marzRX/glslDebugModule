@@ -4,10 +4,10 @@
 
 1. **Script Copying**
 
-    Copy the script and the debug module to the same directory as the shader you want to debug.
+    Copy the debug module and the script and to the same directory as the shader you want to debug.
     
-    - Script: `insert_debug_module.sh`
     - Debug Module: `debug_module_gl.glsl`
+    - Script: `insert_debug_module.sh`
 
 2. **Adding Debug Directives**
 
