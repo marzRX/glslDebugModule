@@ -79,3 +79,4 @@ m_texture[TEX_DEBUG_DIGITS]に数字のテクスチャアトラスがロード�
 - [gl3w](https://github.com/skaslev/gl3w)
 
 また、デジタルフォントの [mplus-1p-medium.ttf](https://fonts.google.com/specimen/M+PLUS+1p) も使用しています。
+サンプルに使用している画像は、Pixabayから入手しました。提供してくれるクリエーターの皆様に感謝いたします。
