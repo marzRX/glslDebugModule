@@ -6,9 +6,38 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <vector>
+#include <ctype.h>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
+
+void toLower(char *str) {
+  for (; *str; ++str) {
+    *str = tolower((unsigned char)*str);
+  }
+}
+
+bool isSupportedBySTB(const char* filepath)
+{
+  const char *ext = strrchr(filepath, '.');
+  if (!ext) return false; // 拡張子がない
+  ext += 1; // ピリオドをスキップ
+
+  char lowercaseExt[8]; // 一般的な拡張子の長さに余裕を持たせる
+  strncpy(lowercaseExt, ext, sizeof(lowercaseExt) - 1);
+  lowercaseExt[sizeof(lowercaseExt) - 1] = '\0'; // 終端文字を保証
+  toLower(lowercaseExt);
+
+  // 拡張子のチェック
+  if (strcmp(lowercaseExt, "png") == 0 || strcmp(lowercaseExt, "bmp") == 0 ||
+      strcmp(lowercaseExt, "jpg") == 0 || strcmp(lowercaseExt, "jpeg") == 0 ||
+      strcmp(lowercaseExt, "psd") == 0 || strcmp(lowercaseExt, "tga") == 0 ||
+      strcmp(lowercaseExt, "gif") == 0 || strcmp(lowercaseExt, "hdr") == 0 ||
+      strcmp(lowercaseExt, "ppm") == 0 || strcmp(lowercaseExt, "pic") == 0) {
+    return true;
+  }
+  return false;
+}
 
 TextureInfo createEmptyTexture(int width, int height, GLenum interp_mode)
 {
@@ -35,6 +64,11 @@ TextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
 {
   TextureInfo textureInfo = {0, 0, 0};
 
+  if (!isSupportedBySTB(filepath)) {
+    printf("対応形式ではありません");
+    return textureInfo;
+  }
+
   const char* extension = strrchr(filepath, '.');
 
   GLuint texture;
@@ -47,33 +81,25 @@ TextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
   GLenum format;
   int channels;
 
-  // ここでファイルの拡張子に基づいて適切なデコード関数を呼び出す
-  if (extension) {
-    if (strcmp(extension, ".png") == 0) {
-      imageData = stbi_load(filepath, &width, &height, &channels, 0);
+  imageData = stbi_load(filepath, &width, &height, &channels, 0);
 
-      if (!imageData) {
-	std::cerr << "Failed to load texture: " << filepath << std::endl;
-	return textureInfo;
-      }
-	
-      if (channels == 1)
-	format = GL_RED;
-      else if (channels == 3)
-	format = GL_RGB;
-      else if (channels == 4)
-	format = GL_RGBA;
-      else {
-	std::cerr << "Unsupported number of channels: " << channels << std::endl;
-	stbi_image_free(imageData);
-	return textureInfo;
-      }
-      /*
-	} else if (strcmp(extension, ".jpg") == 0 ||
-	strcmp(extension, ".jpeg") == 0) {
-      */
-    } // png
+  if (!imageData) {
+    std::cerr << "Failed to load texture: " << filepath << std::endl;
+    return textureInfo;
   }
+	
+  if (channels == 1)
+    format = GL_RED;
+  else if (channels == 3)
+    format = GL_RGB;
+  else if (channels == 4)
+    format = GL_RGBA;
+  else {
+    std::cerr << "Unsupported number of channels: " << channels << std::endl;
+    stbi_image_free(imageData);
+    return textureInfo;
+  }
+
   glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, imageData);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, interp_mode);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, interp_mode);
