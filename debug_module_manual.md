@@ -76,3 +76,4 @@ This software uses the following open source libraries:
 - [gl3w](https://github.com/skaslev/gl3w)
 
 In addition, it uses the digital font [mplus-1p-medium.ttf](https://fonts.google.com/specimen/M+PLUS+1p).
+The sample image used in the demonstration was sourced from Pixabay. We extend our gratitude to the Pixabay community and its contributors.
