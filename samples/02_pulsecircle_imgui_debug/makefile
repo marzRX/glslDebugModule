@@ -18,7 +18,11 @@ DIR_GLCOMMON = $(CURROOT)External/marglCommon
 DIR_GL3W = $(CURROOT)External/gl3w
 DIR_IMGUI = $(CURROOT)External/imgui
 DIR_STB = $(CURROOT)External/stb
-INC = -I$(DIR_GLCOMMON) -I$(DIR_IMGUI) -I$(DIR_GL3W) -I$(DIR_STB)
+INC = -I$(DIR_GLCOMMON) -I$(DIR_IMGUI) -I$(DIR_STB)
+ifdef GL3W
+INC += -I$(DIR_GL3W)
+endif
+
 ifdef WINDIR
   # Windows (msys2)
   LIBS = -lopengl32 -lglfw3
