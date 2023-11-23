@@ -122,9 +122,9 @@ unsigned int makeUBO(int datasize, void *data)
   GLuint ubo;
 
   glGenBuffers(1, &ubo);
-  glBindBuffer(GL_ARRAY_BUFFER, ubo);
-//  glBufferData(GL_ARRAY_BUFFER, datasize, data, GL_STATIC_DRAW);
-  glBufferData(GL_ARRAY_BUFFER, datasize, data, GL_DYNAMIC_DRAW);
+  glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+//  glBufferData(GL_UNIFORM_BUFFER, datasize, data, GL_STATIC_DRAW);
+  glBufferData(GL_UNIFORM_BUFFER, datasize, data, GL_DYNAMIC_DRAW);
 
   return ubo;
 }
