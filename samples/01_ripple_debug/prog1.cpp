@@ -359,11 +359,18 @@ void render_frame()
 
           glBufferData(GL_UNIFORM_BUFFER, sizeof(TRippleInfo) * RIPPLE_COUNT, &ripples, GL_DYNAMIC_DRAW);
 
+          //----------------------------------------------------------------------
           // Uniform Block 対応コード
           GLuint bindingPoint;
+
           bindingPoint = 0;
+          glBindBuffer(GL_UNIFORM_BUFFER, ubo_basics);
+          glBufferData(GL_UNIFORM_BUFFER, sizeof(TBasicData), &basicdata, GL_DYNAMIC_DRAW);
           glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, ubo_basics);
+
           bindingPoint = 1;
+          glBindBuffer(GL_UNIFORM_BUFFER, ubo_ripple);
+          glBufferData(GL_UNIFORM_BUFFER, sizeof(TRippleInfo) * RIPPLE_COUNT, &ripples, GL_DYNAMIC_DRAW);
           glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, ubo_ripple);
 
           // drawcall
