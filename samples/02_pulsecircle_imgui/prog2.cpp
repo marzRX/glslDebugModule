@@ -342,7 +342,7 @@ int main(void)
   glfwMakeContextCurrent(window);
 
 #ifdef GPUINFO
-  // glutCreateWindow() の後に、GPU情報を取得する。
+  // gl**CreateWindow() の後に、GPU情報を取得する。
   printf("OpenGL Vendor  = %s\n", glGetString(GL_VENDOR));
   printf("OpenGL GPU     = %s\n", glGetString(GL_RENDERER));
   printf("OpenGL Version = %s\n", glGetString(GL_VERSION));
