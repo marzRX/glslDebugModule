@@ -39,9 +39,9 @@ bool isSupportedBySTB(const char* filepath)
   return false;
 }
 
-TextureInfo createEmptyTexture(int width, int height, GLenum interp_mode)
+TTextureInfo createEmptyTexture(int width, int height, GLenum interp_mode)
 {
-  TextureInfo textureInfo = {0, 0, 0};
+  TTextureInfo textureInfo = {0, 0, 0};
 
   GLuint texture;
   glGenTextures(1, &texture);
@@ -60,9 +60,9 @@ TextureInfo createEmptyTexture(int width, int height, GLenum interp_mode)
   return textureInfo;
 }
 
-TextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
+TTextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
 {
-  TextureInfo textureInfo = {0, 0, 0};
+  TTextureInfo textureInfo = {0, 0, 0};
 
   if (!isSupportedBySTB(filepath)) {
     printf("対応形式ではありません");
