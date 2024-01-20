@@ -283,7 +283,6 @@ int init()
   }
   glBindVertexArray(0);
 
-  // VAO Binding
   glBindVertexArray(vao[VAO_UVMAP]);
   {
     vbo = makeVBO(sizeof(verts), verts);
@@ -357,15 +356,11 @@ void render_frame()
 
           setup_touch();
 
-          glBufferData(GL_UNIFORM_BUFFER, sizeof(TRippleInfo) * RIPPLE_COUNT, &ripples, GL_DYNAMIC_DRAW);
-
           //----------------------------------------------------------------------
           // Uniform Block 対応コード
           GLuint bindingPoint;
 
           bindingPoint = 0;
-          glBindBuffer(GL_UNIFORM_BUFFER, ubo_basics);
-          glBufferData(GL_UNIFORM_BUFFER, sizeof(TBasicData), &basicdata, GL_DYNAMIC_DRAW);
           glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, ubo_basics);
 
           bindingPoint = 1;

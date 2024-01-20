@@ -134,14 +134,18 @@ int init()
   }
   shader[GLSL_IMAGE_PROC].Disable();
 
+  //----------------------------------------------------------------------
   // VAO
+  //----------------------------------------------------------------------
   glGenVertexArrays(1, &vao[VAO_IMAGE_PROC]);
   glGenVertexArrays(1, &vao[VAO_UVMAP]);
 
   GLuint vbo;
   GLuint vbo_uv;
 
+  //----------------------------------------------------------------------
   // VAO Binding
+  //----------------------------------------------------------------------
   glBindVertexArray(vao[VAO_IMAGE_PROC]);
   {
     vbo = makeVBO(sizeof(verts), verts);
@@ -150,7 +154,6 @@ int init()
   }
   glBindVertexArray(0);
 
-  // VAO Binding
   glBindVertexArray(vao[VAO_UVMAP]);
   {
     vbo = makeVBO(sizeof(verts), verts);
@@ -180,7 +183,6 @@ void bind_sampler(GLuint program, const char *name, GLint unit_no, GLuint textur
 //  assert(glGetError() == GL_NO_ERROR);
   glActiveTexture(GL_TEXTURE0 + unit_no); // テクスチャユニット unit_no
   glBindTexture(GL_TEXTURE_2D, texture);
-//  glBindSampler(unit_no, m_sampler);
 }
 
 void render_imgui()
