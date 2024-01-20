@@ -20,7 +20,7 @@ enum {
   TEX_DEBUG_DIGITS,
   TEX_MAX
 };
-TextureInfo m_texture[TEX_MAX];
+TTextureInfo m_texture[TEX_MAX];
 
 enum {
   GLSL_TRIANGLE, // 単一シェーダによる画像処理のときは、GLSL_IMAGE_PROC を使用する(毎回リネームするのは大変だから）
