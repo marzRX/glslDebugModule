@@ -505,8 +505,8 @@ int main(void)
   printf("GLSL   Version = %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 #endif
 
-#ifdef GLEW
   // OpenGL 拡張機能を使えるように！！
+#ifdef GLEW
   glewExperimental = GL_TRUE;
   GLenum err = glewInit();
   if (err != GLEW_OK) {
