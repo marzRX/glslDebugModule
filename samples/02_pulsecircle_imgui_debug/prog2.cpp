@@ -22,7 +22,7 @@ enum {
   TEX_DEBUG_DIGITS,
   TEX_MAX
 };
-TextureInfo m_texture[TEX_MAX];
+TTextureInfo m_texture[TEX_MAX];
 GLuint m_framebuffer;
 
 enum {

@@ -25,7 +25,7 @@ enum {
   TEX_DST,
   TEX_MAX
 };
-TextureInfo m_texture[TEX_MAX];
+TTextureInfo m_texture[TEX_MAX];
 GLuint m_framebuffer;
 
 const float AMP_MAX = 32;
