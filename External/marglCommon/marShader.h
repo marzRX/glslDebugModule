@@ -44,6 +44,8 @@ public:
     return -1;
   }
 
+  // PrintLocations(): ロケーションのマッピング状態を表示し、エラーの有無をチェック
+  // 戻り値はエラーがあれば -1、なければ 0
   int PrintLocations() {
     bool hasError = false;
 
@@ -57,16 +59,45 @@ public:
     return hasError ? -1 : 0;
   }
 
-  // ＠＠既存のコードをサポートするために残しておく
-  [[deprecated("Use SetLocation() and GetLocation() instead.")]]
-  void Activate(const char* name, int loc = -1) {
-    SetLocation(name, loc);
+  // 簡単のためユニフォーム変数へのアクセスはこちらを使用する
+  // 例) glUniform2f(shader[GLSL_IMAGE_PROC]["uImageSize"], img_width, img_height);
+  int operator[](const char* name) {
+    if (location.count(name) > 0) {
+      return location[name];
+    } else {
+      SetLocation(name);
+      return GetLocation(name);
+    }
   }
 
-  [[deprecated("Use GetLocation() instead.")]]
-  int operator[](const char* name) {
-    return GetLocation(name);
-  }
+  //----------------------------------------------------------------------
+  // deprecated として分類した関数群（既存のコードをサポートするために残しておく）
+  //----------------------------------------------------------------------
+  [[deprecated("SetLocation() を使用してください。")]]
+    // Use SetLocation() instead.
+    void Activate(const char* name, int loc = -1) {
+      SetLocation(name, loc);
+    }
+
+  [[deprecated("PrintLocations() を使用してください。")]]
+    // Use PrintLocations() instead.
+    int Print() {
+      return PrintLocations();
+    }
+
+  [[deprecated("PrintLocations()の戻り値をチェックしてエラーを判定してください。")]]
+    // Please check the return value of PrintLocations() to determine errors.
+    int CheckError() {
+      // ダミーで正常を返却
+      return 0;
+    }
+
+  [[deprecated("clear()は不要です。リソースはデストラクタによって解放されます。")]]
+    // clear() is no longer required as resources are released by the destructor.
+    void clear() {
+      // 何もしない
+    }
+
 
 private:
   std::map<std::string, int> location;
