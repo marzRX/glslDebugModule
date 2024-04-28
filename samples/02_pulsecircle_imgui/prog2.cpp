@@ -418,6 +418,7 @@ int main(void)
   }
 
   quit_opengl();
+  glfwDestroyWindow(window);
   glfwTerminate();
   return 0;
 }

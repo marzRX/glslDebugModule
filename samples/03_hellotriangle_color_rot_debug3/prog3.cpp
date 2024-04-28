@@ -376,6 +376,7 @@ int main(int argc, char *argv[])
   }
 
   quit_opengl();
+  glfwDestroyWindow(window);
   glfwTerminate();
   return 0;
 }
