@@ -398,13 +398,13 @@ int main(void)
   //----------------------------------------------------------------------
   float text_fontsize = 20.0f; // フォントサイズ
   float icon_fontsize = 17.0f; // フォントサイズ
-  ImFontConfig icons_config;
+  ImFontConfig fonts_config;
 
   // .ttfの文字の中からGetGlyphRangesJapaneseで指定された漢字などの文字をimguiの中で使えるようにします。
   io.Fonts->AddFontFromFileTTF(FONT_SRC, text_fontsize, NULL, io.Fonts->GetGlyphRangesJapanese());
 
-  icons_config.MergeMode = true;
-  icons_config.PixelSnapH = true;
+  fonts_config.MergeMode = true;
+  fonts_config.PixelSnapH = true;
   //----------------------------------------------------------------------
 
   while ( ! glfwWindowShouldClose (window) ) {
