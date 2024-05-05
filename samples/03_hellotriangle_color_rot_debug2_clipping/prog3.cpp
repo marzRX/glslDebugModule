@@ -313,6 +313,9 @@ void quit_opengl()
 
   glDisableVertexAttribArray(0);
 
+  // テクスチャの削除
+  glDeleteTextures(1, &m_texture[TEX_DEBUG_DIGITS].id);
+
   // GLSLプログラムの削除
   for (int i=0; i<GLSL_MAX; i++) {
     glDeleteProgram(shader[i].program);
