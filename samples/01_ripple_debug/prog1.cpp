@@ -570,9 +570,11 @@ void quit_opengl()
   glDeleteFramebuffers(1, &m_framebuffer);
 
   // テクスチャの削除
+  GLuint del_texture[TEX_MAX];
   for (int i=0; i<TEX_MAX; i++) {
-    glDeleteTextures(1, &m_texture[i].id);
+    del_texture[i] = m_texture[i].id;
   }
+  glDeleteTextures(1, del_texture);
 
   // GLSLプログラムの削除
   for (int i=0; i<GLSL_MAX; i++) {
