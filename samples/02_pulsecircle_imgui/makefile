@@ -1,19 +1,19 @@
 CURROOT = $(shell git rev-parse --show-cdup)
 # CURROOT の終端は、'/', Git のルートとなるパスを取得してる
 
-CFLAGS = -c -g
+CXXFLAGS = -c -g
 #----------------------------------------------------------------------
 # GLEW/GL3W switch, default GLEW, GL3W を使うときは make GL3W=1
 #----------------------------------------------------------------------
 ifdef GL3W
-	CFLAGS += -DGL3W
+	CXXFLAGS += -DGL3W
 else
-	CFLAGS += -DGLEW
+	CXXFLAGS += -DGLEW
 	GLEW = 1
 endif
 #----------------------------------------------------------------------
 
-CC = g++
+CXX = g++
 DIR_GLCOMMON = $(CURROOT)External/marglCommon
 DIR_GL3W = $(CURROOT)External/gl3w
 DIR_IMGUI = $(CURROOT)External/imgui
@@ -46,37 +46,37 @@ ifdef GL3W
 endif
 
 $(TARGET): $(OBJS)
-	$(CC) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
 
 marGLSLLite.o: $(DIR_GLCOMMON)/marGLSLLite.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_GLCOMMON)/marGLSLLite.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marGLSLLite.cpp
 
 marTexture.o: $(DIR_GLCOMMON)/marTexture.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_GLCOMMON)/marTexture.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marTexture.cpp
 
 gl3w.o: $(DIR_GL3W)/gl3w.c
-	$(CC) $(INC) $(CFLAGS) $(DIR_GL3W)/gl3w.c
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GL3W)/gl3w.c
 
 prog$(V).o: prog$(V).cpp
-	$(CC) $(INC) $(CFLAGS) prog$(V).cpp
+	$(CXX) $(INC) $(CXXFLAGS) prog$(V).cpp
 
 imgui.o: $(DIR_IMGUI)/imgui.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_IMGUI)/imgui.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui.cpp
 
 imgui_widgets.o: $(DIR_IMGUI)/imgui_widgets.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_IMGUI)/imgui_widgets.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_widgets.cpp
 
 imgui_draw.o: $(DIR_IMGUI)/imgui_draw.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_IMGUI)/imgui_draw.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_draw.cpp
 
 imgui_impl_glfw.o: $(DIR_IMGUI)/imgui_impl_glfw.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_IMGUI)/imgui_impl_glfw.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_impl_glfw.cpp
 
 imgui_impl_opengl3.o: $(DIR_IMGUI)/imgui_impl_opengl3.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_IMGUI)/imgui_impl_opengl3.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_impl_opengl3.cpp
 
 imgui_tables.o: $(DIR_IMGUI)/imgui_tables.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_IMGUI)/imgui_tables.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_tables.cpp
 
 all: $(TARGET)
 

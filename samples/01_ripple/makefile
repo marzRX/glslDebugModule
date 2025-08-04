@@ -1,19 +1,19 @@
 CURROOT = $(shell git rev-parse --show-cdup)
 # CURROOT の終端は、'/', Git のルートとなるパスを取得してる
 
-CFLAGS = -c -g
+CXXFLAGS = -c -g
 #----------------------------------------------------------------------
 # GLEW/GL3W switch, default GLEW, GL3W を使うときは make GL3W=1
 #----------------------------------------------------------------------
 ifdef GL3W
-	CFLAGS += -DGL3W
+	CXXFLAGS += -DGL3W
 else
-	CFLAGS += -DGLEW
+	CXXFLAGS += -DGLEW
 	GLEW = 1
 endif
 #----------------------------------------------------------------------
 
-CC = g++
+CXX = g++
 DIR_GLCOMMON = $(CURROOT)External/marglCommon
 DIR_GL3W = $(CURROOT)External/gl3w
 DIR_STB = $(CURROOT)External/stb
@@ -46,22 +46,22 @@ ifdef GL3W
 endif
 
 $(TARGET): $(OBJS)
-	$(CC) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
 
 marGLSLLite.o: $(DIR_GLCOMMON)/marGLSLLite.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_GLCOMMON)/marGLSLLite.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marGLSLLite.cpp
 
 marTexture.o: $(DIR_GLCOMMON)/marTexture.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_GLCOMMON)/marTexture.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marTexture.cpp
 
 marHRTimer.o: $(DIR_GLCOMMON)/marHRTimer.cpp
-	$(CC) $(INC) $(CFLAGS) $(DIR_GLCOMMON)/marHRTimer.cpp
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marHRTimer.cpp
 
 gl3w.o: $(DIR_GL3W)/gl3w.c
-	$(CC) $(INC) $(CFLAGS) $(DIR_GL3W)/gl3w.c
+	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GL3W)/gl3w.c
 
 prog$(V).o: prog$(V).cpp
-	$(CC) $(INC) $(CFLAGS) prog$(V).cpp
+	$(CXX) $(INC) $(CXXFLAGS) prog$(V).cpp
 
 all: $(TARGET)
 
