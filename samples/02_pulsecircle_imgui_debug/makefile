@@ -45,6 +45,8 @@ ifdef GL3W
   OBJS += gl3w.o
 endif
 
+all: $(TARGET)
+
 $(TARGET): $(OBJS)
 	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
 
@@ -77,8 +79,6 @@ imgui_impl_opengl3.o: $(DIR_IMGUI)/imgui_impl_opengl3.cpp
 
 imgui_tables.o: $(DIR_IMGUI)/imgui_tables.cpp
 	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_tables.cpp
-
-all: $(TARGET)
 
 clean:
 	-rm -f $(TARGET)

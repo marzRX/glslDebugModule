@@ -45,6 +45,8 @@ ifdef GL3W
   OBJS += gl3w.o
 endif
 
+all: $(TARGET)
+
 $(TARGET): $(OBJS)
 	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
 
@@ -62,8 +64,6 @@ gl3w.o: $(DIR_GL3W)/gl3w.c
 
 prog$(V).o: prog$(V).cpp
 	$(CXX) $(INC) $(CXXFLAGS) prog$(V).cpp
-
-all: $(TARGET)
 
 clean:
 	-rm -f $(TARGET)
