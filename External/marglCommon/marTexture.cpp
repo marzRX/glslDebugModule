@@ -78,6 +78,7 @@ TTextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
   GLsizei width, height;
   GLubyte *imageData;
 
+  GLenum gpu_format;
   GLenum format;
   int channels;
 
@@ -88,19 +89,22 @@ TTextureInfo loadTextureEx(const char *filepath, GLenum interp_mode)
     return textureInfo;
   }
 	
-  if (channels == 1)
+  if (channels == 1) {
+    gpu_format = GL_R8;
     format = GL_RED;
-  else if (channels == 3)
+  } else if (channels == 3) {
+    gpu_format = GL_RGB8;
     format = GL_RGB;
-  else if (channels == 4)
+  } else if (channels == 4) {
+    gpu_format = GL_RGBA8;
     format = GL_RGBA;
-  else {
+  } else {
     std::cerr << "Unsupported number of channels: " << channels << std::endl;
     stbi_image_free(imageData);
     return textureInfo;
   }
 
-  glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, imageData);
+  glTexImage2D(GL_TEXTURE_2D, 0, gpu_format, width, height, 0, format, GL_UNSIGNED_BYTE, imageData);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, interp_mode);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, interp_mode);
 //  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
