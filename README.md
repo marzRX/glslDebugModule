@@ -1,5 +1,7 @@
 # glslDebugModule
 
+[![Japanese README](https://img.shields.io/badge/README-日本語-blue)](./jp/README.md)
+
 glslDebugModule is a GLSL debugging assistance module intended for OpenGL 2D programs. By integrating this module into your program under development, it aims to aid in the debugging of GLSL. It's particularly suited for applications like 2D image processing. glslDebugModule operates on both Windows and Linux.
 
 (Note: Although it can be used with 3D programs, debugging information may be limited due to clipping.)
