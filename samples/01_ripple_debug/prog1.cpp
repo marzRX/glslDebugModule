@@ -57,24 +57,24 @@ GLfloat uvs[] = {
   1.0f, 0.0f, // (1, 0)
 };
 
-struct TBasicData {
+struct alignas(16) TBasicData {
   float img_size_x;
   float img_size_y;
   float dummy[2]; // 配列は、16バイトアラインなので
 };
 TBasicData basicdata;
 
-const int RIPPLE_COUNT = 4;
+const int RIPPLE_COUNT_MAX = 4;
 
-struct TRippleInfo {
+struct alignas(16) TRippleInfo {
   float touch_x;
   float touch_y;
   float amp;
   float delta_kappa;
 };
-TRippleInfo ripples[RIPPLE_COUNT];
+TRippleInfo ripples[RIPPLE_COUNT_MAX];
 
-const int TOUCH_COUNT = RIPPLE_COUNT;
+const int TOUCH_COUNT = RIPPLE_COUNT_MAX;
 typedef TRippleInfo TTouch;
 std::vector<TTouch> mTouch(TOUCH_COUNT);
 
@@ -309,7 +309,7 @@ int init()
   push_touch(src_width/2.0, src_height/2.0+128.0, AMP_MAX, delta_theta);
 
   ubo_basics = makeUBO(sizeof(basicdata), &basicdata);
-  ubo_ripple = makeUBO(sizeof(TRippleInfo) * RIPPLE_COUNT, &ripples);
+  ubo_ripple = makeUBO(sizeof(TRippleInfo) * RIPPLE_COUNT_MAX, &ripples);
 
   return 0;
 }
@@ -352,7 +352,7 @@ void render_frame()
 
           bind_sampler(shader[GLSL_IMAGE_PROC].program, "debug_digits", 10, m_texture[TEX_DEBUG_DIGITS].id);
 
-          glUniform1i(glGetUniformLocation(shader[GLSL_IMAGE_PROC].program, "uRippleCount"), RIPPLE_COUNT);
+          glUniform1i(glGetUniformLocation(shader[GLSL_IMAGE_PROC].program, "uRippleCount"), RIPPLE_COUNT_MAX);
 
           setup_touch();
 
@@ -365,7 +365,7 @@ void render_frame()
 
           bindingPoint = 1;
           glBindBuffer(GL_UNIFORM_BUFFER, ubo_ripple);
-          glBufferData(GL_UNIFORM_BUFFER, sizeof(TRippleInfo) * RIPPLE_COUNT, &ripples, GL_DYNAMIC_DRAW);
+          glBufferData(GL_UNIFORM_BUFFER, sizeof(TRippleInfo) * RIPPLE_COUNT_MAX, &ripples, GL_DYNAMIC_DRAW);
           glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, ubo_ripple);
 
           // drawcall
