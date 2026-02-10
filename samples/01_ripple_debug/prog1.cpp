@@ -62,7 +62,7 @@ struct alignas(16) TBasicData {
   float img_size_y;
   float dummy[2]; // 配列は、16バイトアラインなので
 };
-TBasicData basicdata;
+TBasicData uboBasicData;
 
 const int RIPPLE_COUNT_MAX = 4;
 
@@ -72,7 +72,7 @@ struct alignas(16) TRippleInfo {
   float amp;
   float delta_kappa;
 };
-TRippleInfo ripples[RIPPLE_COUNT_MAX];
+TRippleInfo uboRippleData[RIPPLE_COUNT_MAX];
 
 const int TOUCH_COUNT = RIPPLE_COUNT_MAX;
 typedef TRippleInfo TTouch;
@@ -156,13 +156,16 @@ void push_touch(float touch_x, float touch_y, float amp, float delta_kappa)
   mTouch[TOUCH_COUNT-1].delta_kappa = delta_kappa;
 }
 
-void setup_touch() {
+// UBOで送るRippleデータを更新する
+void buildRippleData() {
   for (int i=0; i<TOUCH_COUNT; i++) {
-    ripples[i].touch_x = mTouch[i].touch_x;
-    ripples[i].touch_y = mTouch[i].touch_y;
-    ripples[i].amp = mTouch[i].amp;
-    ripples[i].delta_kappa = mTouch[i].delta_kappa;
+    uboRippleData[i].touch_x = mTouch[i].touch_x;
+    uboRippleData[i].touch_y = mTouch[i].touch_y;
+    uboRippleData[i].amp = mTouch[i].amp;
+    uboRippleData[i].delta_kappa = mTouch[i].delta_kappa;
   }
+  glBindBuffer(GL_UNIFORM_BUFFER, ubo_ripple);
+  glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(TRippleInfo) * RIPPLE_COUNT_MAX, &uboRippleData);
 }
 
 void print_touch() {
@@ -301,15 +304,15 @@ int init()
   src_width = m_texture[TEX_SRC].width;
   src_height = m_texture[TEX_SRC].height;
 
-  basicdata.img_size_x = src_width;
-  basicdata.img_size_y = src_height;
+  uboBasicData.img_size_x = src_width;
+  uboBasicData.img_size_y = src_height;
   clear_touch();
   push_touch(src_width/2.0-128.0, src_height/2.0-128.0, AMP_MAX, delta_theta);
   push_touch(src_width/2.0+128.0, src_height/2.0-128.0, AMP_MAX, delta_theta);
   push_touch(src_width/2.0, src_height/2.0+128.0, AMP_MAX, delta_theta);
 
-  ubo_basics = makeUBO(sizeof(basicdata), &basicdata);
-  ubo_ripple = makeUBO(sizeof(TRippleInfo) * RIPPLE_COUNT_MAX, &ripples);
+  ubo_basics = makeUBO(sizeof(uboBasicData), &uboBasicData);
+  ubo_ripple = makeUBO(sizeof(TRippleInfo) * RIPPLE_COUNT_MAX, &uboRippleData);
 
   return 0;
 }
@@ -354,19 +357,12 @@ void render_frame()
 
           glUniform1i(glGetUniformLocation(shader[GLSL_IMAGE_PROC].program, "uRippleCount"), RIPPLE_COUNT_MAX);
 
-          setup_touch();
+          buildRippleData();
 
           //----------------------------------------------------------------------
           // Uniform Block 対応コード
-          GLuint bindingPoint;
-
-          bindingPoint = 0;
-          glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, ubo_basics);
-
-          bindingPoint = 1;
-          glBindBuffer(GL_UNIFORM_BUFFER, ubo_ripple);
-          glBufferData(GL_UNIFORM_BUFFER, sizeof(TRippleInfo) * RIPPLE_COUNT_MAX, &ripples, GL_DYNAMIC_DRAW);
-          glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, ubo_ripple);
+          glBindBufferBase(GL_UNIFORM_BUFFER, 0, ubo_basics); // binding point 0
+          glBindBufferBase(GL_UNIFORM_BUFFER, 1, ubo_ripple); // binding point 1
 
           // drawcall
           glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTS_COUNT4);
