@@ -192,7 +192,7 @@ int marCreateGLSLProgram(unsigned int *programID,
 
       code = (unsigned char *)malloc(filesize+1); // +1 for null terminate
       {
-        fread(code, filesize, 1, fp);
+        fread(code, sizeof(unsigned char), filesize, fp);
         code[filesize] = 0; // null terminate
         res = marCompileShader(si[i].filename, si[i].object, code);
       }
