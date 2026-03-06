@@ -1,7 +1,7 @@
 CURROOT = $(shell git rev-parse --show-cdup)
 # CURROOT の終端は、'/', Git のルートとなるパスを取得してる
 
-CXXFLAGS = -c -g
+CXXFLAGS = -g
 #----------------------------------------------------------------------
 # GLEW/GL3W switch, default GLEW, GL3W を使うときは make GL3W=1
 #----------------------------------------------------------------------
@@ -51,19 +51,19 @@ $(TARGET): $(OBJS)
 	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
 
 marGLSLLite.o: $(DIR_GLCOMMON)/marGLSLLite.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marGLSLLite.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 marTexture.o: $(DIR_GLCOMMON)/marTexture.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marTexture.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 marHRTimer.o: $(DIR_GLCOMMON)/marHRTimer.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marHRTimer.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 gl3w.o: $(DIR_GL3W)/gl3w.c
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GL3W)/gl3w.c
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 prog$(V).o: prog$(V).cpp
-	$(CXX) $(INC) $(CXXFLAGS) prog$(V).cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	-rm -f $(TARGET)

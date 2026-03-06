@@ -1,7 +1,7 @@
 CURROOT = $(shell git rev-parse --show-cdup)
 # CURROOT の終端は、'/', Git のルートとなるパスを取得してる
 
-CXXFLAGS = -c -g
+CXXFLAGS = -g
 #----------------------------------------------------------------------
 # GLEW/GL3W switch, default GLEW, GL3W を使うときは make GL3W=1
 #----------------------------------------------------------------------
@@ -51,34 +51,34 @@ $(TARGET): $(OBJS)
 	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
 
 marGLSLLite.o: $(DIR_GLCOMMON)/marGLSLLite.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marGLSLLite.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 marTexture.o: $(DIR_GLCOMMON)/marTexture.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GLCOMMON)/marTexture.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 gl3w.o: $(DIR_GL3W)/gl3w.c
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_GL3W)/gl3w.c
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 prog$(V).o: prog$(V).cpp
-	$(CXX) $(INC) $(CXXFLAGS) prog$(V).cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui.o: $(DIR_IMGUI)/imgui.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui_widgets.o: $(DIR_IMGUI)/imgui_widgets.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_widgets.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui_draw.o: $(DIR_IMGUI)/imgui_draw.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_draw.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui_impl_glfw.o: $(DIR_IMGUI)/imgui_impl_glfw.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_impl_glfw.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui_impl_opengl3.o: $(DIR_IMGUI)/imgui_impl_opengl3.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_impl_opengl3.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui_tables.o: $(DIR_IMGUI)/imgui_tables.cpp
-	$(CXX) $(INC) $(CXXFLAGS) $(DIR_IMGUI)/imgui_tables.cpp
+	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	-rm -f $(TARGET)
