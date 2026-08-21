@@ -69,8 +69,8 @@ prog$(V).o: prog$(V).cpp
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	-rm -f *.o
-	-rm -f $(TARGET)
+	rm -f *.o
+	rm -f $(TARGET)
 
 run: $(TARGET)
 	./$(TARGET)
