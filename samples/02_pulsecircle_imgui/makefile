@@ -1,5 +1,5 @@
-CURROOT = $(shell git rev-parse --show-cdup)
-# CURROOT の終端は、'/', Git のルートとなるパスを取得してる
+REPO_ROOT := $(shell git rev-parse --show-cdup)
+# REPO_ROOT の終端は、'/', Git のルートとなるパスを取得してる
 
 CXXFLAGS = -g
 #----------------------------------------------------------------------
@@ -14,10 +14,10 @@ endif
 #----------------------------------------------------------------------
 
 CXX = g++
-DIR_GLCOMMON = $(CURROOT)External/marglCommon
-DIR_GL3W = $(CURROOT)External/gl3w
-DIR_IMGUI = $(CURROOT)External/imgui
-DIR_STB = $(CURROOT)External/stb
+DIR_GLCOMMON = $(REPO_ROOT)External/marglCommon
+DIR_GL3W = $(REPO_ROOT)External/gl3w
+DIR_IMGUI = $(REPO_ROOT)External/imgui
+DIR_STB = $(REPO_ROOT)External/stb
 INC = -I$(DIR_GLCOMMON) -I$(DIR_IMGUI) -I$(DIR_STB)
 ifdef GL3W
 INC += -I$(DIR_GL3W)
@@ -45,6 +45,7 @@ ifdef GL3W
   OBJS += gl3w.o
 endif
 
+.PHONY: all clean run
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
