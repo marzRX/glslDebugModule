@@ -38,9 +38,12 @@ else
 endif
 endif
 
-V?=3
-TARGET = prog$(V).exe
-OBJS = prog$(V).o marGLSLLite.o marTexture.o marHRTimer.o marMatrix2.o
+# prog*.cpp をメインモジュールとする
+MAIN_SRC := $(wildcard prog*.cpp)
+TARGET_BASE := $(basename $(MAIN_SRC))
+
+TARGET = $(TARGET_BASE).exe
+OBJS = $(TARGET_BASE).o marGLSLLite.o marTexture.o marHRTimer.o marMatrix2.o
 ifdef GL3W
   OBJS += gl3w.o
 endif
@@ -66,7 +69,7 @@ marMatrix2.o: $(DIR_GLCOMMON)/marMatrix2.cpp
 gl3w.o: $(DIR_GL3W)/gl3w.c
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
-prog$(V).o: prog$(V).cpp
+$(TARGET_BASE).o: $(TARGET_BASE).cpp
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 clean:

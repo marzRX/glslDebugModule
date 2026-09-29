@@ -37,9 +37,12 @@ ifdef GLEW
 endif
 endif
 
-V?=2
-TARGET = prog$(V).exe
-OBJS = prog$(V).o marGLSLLite.o marTexture.o \
+# prog*.cpp をメインモジュールとする
+MAIN_SRC := $(wildcard prog*.cpp)
+TARGET_BASE := $(basename $(MAIN_SRC))
+
+TARGET = $(TARGET_BASE).exe
+OBJS = $(TARGET_BASE).o marGLSLLite.o marTexture.o \
 imgui.o imgui_widgets.o imgui_draw.o imgui_impl_glfw.o imgui_impl_opengl3.o imgui_tables.o
 ifdef GL3W
   OBJS += gl3w.o
@@ -60,7 +63,7 @@ marTexture.o: $(DIR_GLCOMMON)/marTexture.cpp
 gl3w.o: $(DIR_GL3W)/gl3w.c
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
-prog$(V).o: prog$(V).cpp
+$(TARGET_BASE).o: $(TARGET_BASE).cpp
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 imgui.o: $(DIR_IMGUI)/imgui.cpp
