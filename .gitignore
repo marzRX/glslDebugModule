@@ -14,4 +14,4 @@ _Camera_
 *.tar
 *.tar.gz
 get_edit_targets.sh
-lists_make.txt
+lists_*
