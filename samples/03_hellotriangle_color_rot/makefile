@@ -14,6 +14,8 @@ endif
 #----------------------------------------------------------------------
 
 CXX = g++
+CC = gcc
+CFLAGS = -g
 DIR_GLCOMMON = $(REPO_ROOT)External/marglCommon
 DIR_GL3W = $(REPO_ROOT)External/gl3w
 DIR_STB = $(REPO_ROOT)External/stb
@@ -67,7 +69,7 @@ marMatrix2.o: $(DIR_GLCOMMON)/marMatrix2.cpp
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
 
 gl3w.o: $(DIR_GL3W)/gl3w.c
-	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
+	$(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 $(TARGET_BASE).o: $(TARGET_BASE).cpp
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
