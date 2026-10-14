@@ -24,7 +24,7 @@ ifdef GL3W
 INC += -I$(DIR_GL3W)
 endif
 
-ifdef WINDIR
+ifeq ($(OS),Windows_NT)
   # Windows (msys2)
   LIBS = -lopengl32 -lglfw3
 ifdef GLEW
@@ -54,7 +54,7 @@ endif
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CXX) $(INC) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
 
 marGLSLLite.o: $(DIR_GLCOMMON)/marGLSLLite.cpp
 	$(CXX) $(INC) $(CXXFLAGS) -c $< -o $@
