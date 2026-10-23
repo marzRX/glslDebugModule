@@ -321,7 +321,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
   }
 }
 
-int main(void)
+int main()
 {
   if (! glfwInit() ) {
     fprintf(stderr, "ERROR: could not start GLFW3\n");
@@ -355,15 +355,16 @@ int main(void)
   GLenum err = glewInit();
   if (err != GLEW_OK) {
     printf("Error: %s\n", glewGetErrorString(err));
+    return 1;
   }
 #elif GL3W
   if (gl3wInit()) {
     fprintf(stderr, "failed to initialize OpenGL\n");
-    return -1;
+    return 1;
   }
   if (!gl3wIsSupported(3, 2)) {
     fprintf(stderr, "OpenGL 3.2 not supported\n");
-    return -1;
+    return 1;
   }
 #endif
   printf("OpenGL %s, GLSL %s\n", glGetString(GL_VERSION),
@@ -372,7 +373,7 @@ int main(void)
   // 拡張命令を有効にしてから初期化処理を呼ぶ
   int result = init();
   if (result != 0) {
-    return result;
+    return 1;
   }
 
   // callback
