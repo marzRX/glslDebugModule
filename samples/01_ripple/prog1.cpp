@@ -1,7 +1,7 @@
 #include <stdio.h>
-#ifdef GLEW
+#if defined(GLEW)
 #include <GL/glew.h>
-#elif GL3W
+#elif defined(GL3W)
 #include <GL/gl3w.h>
 #endif
 #include <GLFW/glfw3.h>
@@ -499,14 +499,14 @@ int main()
 #endif
 
   // OpenGL 拡張機能を使えるように！！
-#ifdef GLEW
+#if defined(GLEW)
   glewExperimental = GL_TRUE;
   GLenum err = glewInit();
   if (err != GLEW_OK) {
     printf("Error: %s\n", glewGetErrorString(err));
     return 1;
   }
-#elif GL3W
+#elif defined(GL3W)
   if (gl3wInit()) {
     fprintf(stderr, "failed to initialize OpenGL\n");
     return 1;
