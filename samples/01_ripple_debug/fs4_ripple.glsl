@@ -12,7 +12,7 @@ struct TRippleInfo {
 };
 
 layout(std140, binding = 1) uniform uRippleset {
-  TRippleInfo ripples[2];
+  TRippleInfo ripples[4];
 };
 
 uniform int uRippleCount;
